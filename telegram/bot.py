@@ -24,6 +24,9 @@ class Handler:
     async def receive(self, request: web.Request) -> web.Response:
         logging.info('Request was received')
         data = await request.json()
+        upd = Update(**data)
+        await self.reaction(upd)
+        return web.Response(status=200)
 
     async def get_request(self, point:str, params:dict={}) -> web.Response:
         headers = {'Content-Type': 'application/json'}
