@@ -8,7 +8,7 @@ from aiohttp import web
 logging.basicConfig(level=logging.INFO)
 
 # Server params
-DOMAIN = os.environ.get('DOMAIN', '')
+DOMAIN = os.environ.get('DOMAIN', 'localhost')
 PORT = int(os.environ.get('PORT', 10000))
 
 # Telegram params
@@ -35,11 +35,14 @@ def set_webhook()->None:
         logging.error(res.json())
         sys.exit('Unable to establish a connection to telegram')
 
+def pulse(req: web.Request) -> web.Response:
+    return web.Response(status=200)
+
 if __name__ == '__main__':
     # set_webhook()
     app = web.Application()
     app.add_routes([
-        web.get(f'/pulse', web.Response(status=200)),
+        web.get(f'/pulse', pulse),
         # web.post(f'/{TG_ENTRYPOINT}', web.Response(status=200)),
         # web.get(f'/{IN_ENTRYPOINT}', web.Response(status=200)),
     ])
