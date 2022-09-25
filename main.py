@@ -36,7 +36,7 @@ def set_webhook()->None:
         sys.exit('Unable to establish a connection to telegram')
 
 if __name__ == '__main__':
-    set_webhook()
+    # set_webhook()
     app = web.Application()
     app.add_routes([
         web.post(f'/{TG_ENTRYPOINT}', web.Response(status=200)),
