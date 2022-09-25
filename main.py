@@ -9,7 +9,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Server params
 DOMAIN = os.environ.get('DOMAIN', '')
-PORT = int(os.environ.get('PORT', 5000))
+PORT = int(os.environ.get('PORT', 10000))
 
 # Telegram params
 TG_API_URL = os.environ.get('TG_API_URL', '')
@@ -39,7 +39,8 @@ if __name__ == '__main__':
     # set_webhook()
     app = web.Application()
     app.add_routes([
-        web.post(f'/{TG_ENTRYPOINT}', web.Response(status=200)),
-        web.get(f'/{IN_ENTRYPOINT}', web.Response(status=200)),
+        web.get(f'/pulse', web.Response(status=200)),
+        # web.post(f'/{TG_ENTRYPOINT}', web.Response(status=200)),
+        # web.get(f'/{IN_ENTRYPOINT}', web.Response(status=200)),
     ])
     web.run_app(app, host='0.0.0.0', port=PORT)
